@@ -1,15 +1,17 @@
 package test;
 
-import domain.Cat;
+import domain.Snake;
 
 public class TestAnimal {
 
     public static void main(String[] args) {
-        Cat cat = new Cat("Thomas");
-        System.out.println(cat);
-        cat.hunt();
-        cat.eat();
-        cat.speak();
-        cat.play();
+        Snake snake = new Snake();
+        System.out.println(snake);
+        snake.sound();
+        snake.move();
+        snake.hunt();
+        snake.eat();
+        snake.eggLaying();
+        snake.sleep();
     }
 }

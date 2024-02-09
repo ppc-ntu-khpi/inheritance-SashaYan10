@@ -1,28 +1,143 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=13787047)
-# Практична робота "Реалізація успадкування"
-Цей репозиторій містить приклад виконання та інструкції для виконання практичної роботи з наслідування в JAVA. 
+# Успадкування – Змія
 
-Для прикладу я змоделював **звичайнісінького кота**😉
+### Naked Snake
+<img src="images/Snake.png" width="40%" height="40%">
 
-<img src="https://github.com/ppc-ntu-khpi/Inheritance-Starter/blob/master/images/cat.jpg" width="100%"/>
-<img src="https://github.com/ppc-ntu-khpi/Inheritance-Starter/blob/master/images/Cat-Diagram.png" width="100%"/>
+### aka Big Boss
+<img src="images/Big%20Boss.png" width="40%" height="40%">
 
-## В рамках практичної роботи ви маєте зробити наступне:
-1. подумайте, які риси та поведінка притаманні всім без винятку тваринам 
-2. оберіть будь-яку тварину (не стримуйте свою фантазію😉)
-2. з допомогою **easyUML** для Netbeans або **StarUML** створіть діаграму класів для обраної тварини. Ви маєте отримати шось подібне до прикладу з цього репозиторію.
-3. згенеруйте каркасний код на основі діаграми
-4. допрацюйте код - *всі методи мають виводити на екран повідомлення про те, що робить тварина!*
-5. створіть тестовий клас, в методі **main** якого створіть об'єкт класу тварини та викличіть його методи
-3. завантажте ваш код до до теки **src** вашого репозиторію (замінивши код прикладу). Експортовану (в PNG) діаграму завантажте в теку **images** та додайте в **Readme** (не забудьте в ньому описати що за тварину ви обрали)
-4. здайте завдання. **УВАГА! Не забудьте, здаючи завдання через Google Classroom, вказати посилання на Ваш репозиторій!**
+Пробачте, просто приколююсь)
 
-## Відеодемонстрація виконання практичної
+## Діаграма класів:
+<img src="images/Діаграма%20класів.png" width="60%" height="60%">
 
-<p align="center">
-<a href="https://www.youtube.com/watch?v=SFSC1omkE8Q&feature=youtu.be" target="_blank"><img src="https://img.youtube.com/vi/SFSC1omkE8Q/0.jpg"/></a>
-</p>
+## Код класу Animal:
+```java
+package domain;
 
-Не забувайте, що ви можете обговорювати завдання в девелоперському мессенджері **Gitter** - у відповідній [чат-кімнаті](https://gitter.im/PPC-SE-2020/OOP?utm_source=share-link&utm_medium=link&utm_campaign=share-link).
+public class Animal {
 
-[![Gitter](https://badges.gitter.im/PPC-SE-2020/OOP.svg)](https://gitter.im/PPC-SE-2020/OOP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+    public Animal() {
+        this("Just an Animal", 100.00);
+    }
+
+    public Animal(String name, double length) {
+        this.name = name;
+        this.length = length;
+    }
+
+    protected String name;
+
+    protected double length;
+
+    public void eat() {
+        System.out.println(name + " is eating.");
+    }
+
+    public void sound() {
+        System.out.println("Naked Snake is hissing.");
+    }
+
+    public void move() {
+        System.out.println("Naked Snake is slithering.");
+    }
+
+}
+```
+
+## Код класу Reptile:
+```java
+package domain;
+
+public class Reptile extends Animal {
+
+    public Reptile() {
+        super("Just a Reptile", 100.00);
+        kind = "Snake";
+        isVenomous = true;
+        skin = "Smooth";
+        reproductionType = "Egg Laying";
+        numberOfLimbs = 0;
+    }
+
+    public Reptile(String name, String kind, boolean isVenomous, String skin, String reproductionType,
+            int numberOfLimbs) {
+        super(name, 100.00);
+        this.kind = kind;
+        this.isVenomous = isVenomous;
+        this.skin = skin;
+        this.reproductionType = reproductionType;
+        this.numberOfLimbs = numberOfLimbs;
+    }
+
+    protected String kind;
+
+    protected boolean isVenomous;
+
+    protected String skin;
+
+    protected String reproductionType;
+
+    protected int numberOfLimbs;
+
+    public void sleep() {
+        System.out.println(name + " sleeping.");
+    }
+
+}
+```
+
+## Код класу Snake:
+```java
+package domain;
+
+public class Snake extends Reptile {
+
+    public Snake() {
+        super("Big Boss", "Snake", true, "Smooth", "Egg Laying", 0);
+    }
+
+    public Snake(String name) {
+        super(name, "Snake", true, "Smooth", "Egg Laying", 0);
+    }
+
+    public void hunt() {
+        System.out.println("Snake aka " + this.name + " hunting.");
+    }
+
+    public void eggLaying() {
+        System.out.println("Snake laying eggs.");
+    }
+
+    public String toString() {
+        return "Naked Snake: \nCalled:\t" + name + "\nKind:\t" + kind + "\nLength:\t" + length + " cm"
+                + "\nIs Venomous?:\t" + isVenomous + "\nSkin:\t" + skin + "\nReproduction Type:\t" + reproductionType
+                + "\nNumber of Limbs:\t" + numberOfLimbs + "\n";
+    }
+
+}
+```
+
+## Код класу TestAnimal:
+```java
+package test;
+
+import domain.Snake;
+
+public class TestAnimal {
+
+    public static void main(String[] args) {
+        Snake snake = new Snake();
+        System.out.println(snake);
+        snake.sound();
+        snake.move();
+        snake.hunt();
+        snake.eat();
+        snake.eggLaying();
+        snake.sleep();
+    }
+}
+```
+
+## Результат:
+![](images/Результат.png)

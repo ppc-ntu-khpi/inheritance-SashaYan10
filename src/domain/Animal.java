@@ -1,28 +1,31 @@
+
 package domain;
 
 public class Animal {
 
+    public Animal() {
+        this("Just an Animal", 100.00);
+    }
+
+    public Animal(String name, double length) {
+        this.name = name;
+        this.length = length;
+    }
+
     protected String name;
 
-    protected int weight;
-
-    public Animal() {
-        name="generic animal";
-        weight=25;
-    }
+    protected double length;
 
     public void eat() {
-        System.out.println("Animal eating...");
+        System.out.println(name + " is eating.");
     }
 
-    public void speak() {
-        System.out.println("Animal speaking...");
+    public void sound() {
+        System.out.println("Naked Snake is hissing.");
     }
 
-    @Override
-    public String toString() {
-        return "My animal:" + "\nName:\t" + name + "\nWeight:\t" + weight+" kg";
+    public void move() {
+        System.out.println("Naked Snake is slithering.");
     }
 
- 
 }
